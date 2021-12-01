@@ -26,7 +26,7 @@
 <meta name=msapplication-TileImage content="../../../icons/mstile-150x150.png">
 <link rel=manifest href=/blog/manifest.json>
 <link rel=canonical href=https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","datePublished":"2021-11-30T00:00:00+00:00","dateModified":"2021-12-01T02:50:10+00:00","url":"https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/","headline":"GitHub Actions 驱动的博客构建","description":"此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客……","inLanguage":"zh-CN","articleSection":"tech","wordCount":815,"image":["https://my0sotis.github.io/blog/images/personal_token.png"],"author":{"@type":"Person","description":"Viva La Vida","email":"my0sotis@qq.com","image":"https://my0sotis.github.io/icons/apple-touch-icon.png","url":"https://my0sotis.github.io/blog/","name":"Mavericks"},"license":"[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)","publisher":{"@type":"Organization","name":"Mlog","logo":{"@type":"ImageObject","url":"https://my0sotis.github.io/icons/apple-touch-icon.png"},"url":"https://my0sotis.github.io/"},"mainEntityOfPage":{"@type":"WebSite","@id":"https://my0sotis.github.io/"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","datePublished":"2021-11-30T00:00:00+00:00","dateModified":"2021-12-01T06:24:41+00:00","url":"https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/","headline":"GitHub Actions 驱动的博客构建","description":"此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客……","inLanguage":"zh-CN","articleSection":"tech","wordCount":1481,"image":["https://my0sotis.github.io/blog/blog/images/personal_token.png","https://my0sotis.github.io/blog/blog/images/set_secret.png"],"author":{"@type":"Person","description":"Viva La Vida","email":"my0sotis@qq.com","image":"https://my0sotis.github.io/icons/apple-touch-icon.png","url":"https://my0sotis.github.io/blog/","name":"Mavericks"},"license":"[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)","publisher":{"@type":"Organization","name":"Mlog","logo":{"@type":"ImageObject","url":"https://my0sotis.github.io/icons/apple-touch-icon.png"},"url":"https://my0sotis.github.io/"},"mainEntityOfPage":{"@type":"WebSite","@id":"https://my0sotis.github.io/"}}</script>
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:site content="@Maverick_">
 <meta name=twitter:creator content="@Maverick_">
@@ -34,10 +34,10 @@
 <meta property="og:description" content="此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客……">
 <meta property="og:url" content="https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/">
 <meta property="og:site_name" content="Mlog">
-<meta property="og:locale" content="zh"><meta property="og:image" content="https://my0sotis.github.io/blog/images/personal_token.png">
+<meta property="og:locale" content="zh"><meta property="og:image" content="https://my0sotis.github.io/blog/blog/images/personal_token.png">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2021-11-30T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-12-01T02:50:10+00:00">
+<meta property="article:modified_time" content="2021-12-01T06:24:41+00:00">
 <meta property="article:section" content="tech">
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@700&text=reuixiy&display=swap" media=print onload="this.media='all'">
 <noscript><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@700&text=reuixiy&display=swap"></noscript>
@@ -96,7 +96,90 @@
 <p>此处教程参见 <a href=https://my0sotis.github.io/2019/0001-Hexo-Deploy/#more target=_blank rel=noopener>Hexo教程 | Mlog (my0sotis.github.io)</a> 的 <code>5.1 创建GitHub Pages</code> 处。</p>
 <h3 id=4-创建personal-access-token><a href=#4-创建personal-access-token class=anchor-link><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96.0-59.27-59.26-59.27-155.7.0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757.0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037.0 01-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482.0 0120.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96.0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454.0 0020.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037.0 00-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639.0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>4. 创建Personal Access Token</h3>
 <p>由于我的代码构建是跨仓库的，常用的 <strong><code>GITHUB_TOKEN</code></strong> 没有权限访问外部仓库，所以需要使用 <strong><code>PERSONAL_TOKEN</code></strong> <sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>[1]</a></sup>。生成 Personal Access Token 的过程即进入到 <a href=https://github.com/ target=_blank rel=noopener>GitHub</a> ，登录到自己的账号上，点击右上角的头像，点选 <code>Settings</code> ，在出来的设置左侧的菜单中找到 <code>Developer settings -> Personal access tokens</code> ，点选 <code>Generate new token</code>，如图配置即可， <code>Note</code> 可以自定义， <code>Expiration</code> GitHub不建议选择永久有效，因而我选择了 <code>90 days</code> ，到期了再次重新生成即可， <code>Select scopes</code> 按如图设置即可。</p>
-<p><img src=/images/personal_token.png alt="Personal Access Token"><span class=caption>◎ Personal Access Token</span></p>
+<p><img src=/blog/images/personal_token.png alt="Personal Access Token"><span class=caption>◎ Personal Access Token</span></p>
+<p>⚠一定要把生成 Personal Access Token 后得到的那个字符串复制下来，如果不记录下来的话，后续只能够重新生成。</p>
+<h3 id=5-在源码的仓库中设置personal-token><a href=#5-在源码的仓库中设置personal-token class=anchor-link><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96.0-59.27-59.26-59.27-155.7.0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757.0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037.0 01-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482.0 0120.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96.0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454.0 0020.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037.0 00-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639.0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>5. 在源码的仓库中设置Personal Token</h3>
+<p>得到对应的Personal Access Token后，我们需要将这个Token设置到源码所在的仓库中。在博客源码的仓库中，选择 <code>Settings -> Secrets -> New Repository secret</code> 进行添加。</p>
+<p><img src=/blog/images/set_secret.png alt="Set Personal Token"><span class=caption>◎ 设置Personal Token</span></p>
+<p>其中，Name可自己设置，此处我设置为 <code>PERSONAL_TOKEN</code> ，Value值即为上文中得到的 Personal Access Token 。</p>
+<h3 id=6-添加github-actions><a href=#6-添加github-actions class=anchor-link><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96.0-59.27-59.26-59.27-155.7.0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757.0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037.0 01-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482.0 0120.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96.0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454.0 0020.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037.0 00-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639.0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>6. 添加GitHub Actions</h3>
+<p>终于到了关键的一步，网络上的教程大多是通过GitHub Actions将源码发布到仓库中，公开源代码，但是对于我而言，我更希望将源代码隐藏起来，将发布网页的代码公开，因而我使用了如下的GitHub Actions。需要在博客源码对应的仓库中找到 <code>Actions</code> 的菜单，点击并创建一个新的 Workflow ，将代码替换为如下代码。</p>
+<div class=highlight><div class=chroma>
+<div class=table-container><table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>github pages</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>main  				# Set a branch to deploy</span><span class=w>
+</span><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-20.04</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes (true OR recursive)</span><span class=w>
+</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
+</span><span class=w>          </span><span class=nt>extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>	</span><span class=c># Use Hugo-extended</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
+</span><span class=w>        </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>github.ref == &#39;refs/heads/main&#39;</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>personal_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.PERSONAL_TOKEN }}	# Use PERSONAL_TOKEN</span><span class=w>
+</span><span class=w>          </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public		# Select the folder contain your website</span><span class=w>
+</span><span class=w>          </span><span class=nt>external_repository</span><span class=p>:</span><span class=w> </span><span class=l>&lt;GitHub User Name&gt;/&lt;Github Repository&gt;	# Select the repository you want to publish</span><span class=w>
+</span><span class=w>          </span><span class=nt>publish_branch</span><span class=p>:</span><span class=w> </span><span class=l>master </span><span class=w> </span><span class=c># Select the branch you want to publish</span><span class=w>
+</span></code></pre></td></tr></table></div>
+</div>
+</div><p>其中，<code>on -> push -> branches</code> 下选择源码仓库中对应的分支。在<code>jobs -> deploy -> steps</code> 下的 <code>Setup Hugo</code> 步骤中，<code>extended</code> 表明需要使用 <code>Hugo-extended</code> 包进行构建；在 <code>Deploy</code> 步骤中，<code>publish_dir</code> 是需要发布网站代码的位置，在 Hugo 中为 <code>./public</code> ； <code>external_repository</code> 为存放网站代码的仓库，按照代码中的格式设置即可； <code>publish_branch</code> 即发布在网站代码的仓库中的分支名。详细的配置可以查看后面附带的文档。<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>[1]</a></sup></p>
+<p>修改完后，点击 <code>Start Commit</code> 就会自动进行代码的构建发布了！你可以在博客源码的仓库中选择 Actions ，查看你的 GitHub Actions运行的流程，不放心的话，还可以在博客源码的仓库进行一次 push 操作。</p>
 <section class=footnotes role=doc-endnotes>
 <hr>
 <ol>

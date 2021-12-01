@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.89.4 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Wed, 01 Dec 2021 02:50:12 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>GitHub Actions 驱动的博客构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</guid><pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客，便只能通过项目创建GitHub Pages，但是这样的话就会出现一个问题，如果不将源码公开的话就无法将博客展示出来，但是我并不确定源码中什么东西是不能够公开的 &lt;s>（之前为了方便甚至将SSH公钥和私钥放在公开的博客仓库中，在同学提醒下才删除）&lt;/s>，于是想将源码和构建出来的代码仓库分离的想法。再者，为了便利的进行博客的构建发布，便考虑使用GitHub Actions自动化地进行持续集成开发。&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.89.4 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Wed, 01 Dec 2021 06:24:43 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>GitHub Actions 驱动的博客构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</guid><pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客，便只能通过项目创建GitHub Pages，但是这样的话就会出现一个问题，如果不将源码公开的话就无法将博客展示出来，但是我并不确定源码中什么东西是不能够公开的 &lt;s>（之前为了方便甚至将SSH公钥和私钥放在公开的博客仓库中，在同学提醒下才删除）&lt;/s>，于是想将源码和构建出来的代码仓库分离的想法。再者，为了便利的进行博客的构建发布，便考虑使用GitHub Actions自动化地进行持续集成开发。&lt;/p>
 &lt;h2 id="demands">Demands&lt;/h2>
 &lt;ol>
 &lt;li>源码与生成网站代码分析，于我而言则是，源码在一个 &lt;code>private&lt;/code> 的仓库，生成出来的网站文件存放在一个 &lt;code>public&lt;/code> 的仓库中用以作为 GitHub Pages 的展示页面。&lt;/li>
@@ -20,7 +20,90 @@
 &lt;p>此处教程参见 &lt;a href="https://my0sotis.github.io/2019/0001-Hexo-Deploy/#more">Hexo教程 | Mlog (my0sotis.github.io)&lt;/a> 的 &lt;code>5.1 创建GitHub Pages&lt;/code> 处。&lt;/p>
 &lt;h3 id="4-创建personal-access-token">4. 创建Personal Access Token&lt;/h3>
 &lt;p>由于我的代码构建是跨仓库的，常用的 &lt;strong>&lt;code>GITHUB_TOKEN&lt;/code>&lt;/strong> 没有权限访问外部仓库，所以需要使用 &lt;strong>&lt;code>PERSONAL_TOKEN&lt;/code>&lt;/strong> &lt;sup id="fnref:1">&lt;a href="https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。生成 Personal Access Token 的过程即进入到 &lt;a href="https://github.com/">GitHub&lt;/a> ，登录到自己的账号上，点击右上角的头像，点选 &lt;code>Settings&lt;/code> ，在出来的设置左侧的菜单中找到 &lt;code>Developer settings -&amp;gt; Personal access tokens&lt;/code> ，点选 &lt;code>Generate new token&lt;/code>，如图配置即可， &lt;code>Note&lt;/code> 可以自定义， &lt;code>Expiration&lt;/code> GitHub不建议选择永久有效，因而我选择了 &lt;code>90 days&lt;/code> ，到期了再次重新生成即可， &lt;code>Select scopes&lt;/code> 按如图设置即可。&lt;/p>
-&lt;p>&lt;img src="https://my0sotis.github.io/blog/images/personal_token.png" alt="Personal Access Token" title="Personal Access Token">&lt;/p>
+&lt;p>&lt;img src="https://my0sotis.github.io/blog/blog/images/personal_token.png" alt="Personal Access Token" title="Personal Access Token">&lt;/p>
+&lt;p>⚠一定要把生成 Personal Access Token 后得到的那个字符串复制下来，如果不记录下来的话，后续只能够重新生成。&lt;/p>
+&lt;h3 id="5-在源码的仓库中设置personal-token">5. 在源码的仓库中设置Personal Token&lt;/h3>
+&lt;p>得到对应的Personal Access Token后，我们需要将这个Token设置到源码所在的仓库中。在博客源码的仓库中，选择 &lt;code>Settings -&amp;gt; Secrets -&amp;gt; New Repository secret&lt;/code> 进行添加。&lt;/p>
+&lt;p>&lt;img src="https://my0sotis.github.io/blog/blog/images/set_secret.png" alt="Set Personal Token" title="设置Personal Token">&lt;/p>
+&lt;p>其中，Name可自己设置，此处我设置为 &lt;code>PERSONAL_TOKEN&lt;/code> ，Value值即为上文中得到的 Personal Access Token 。&lt;/p>
+&lt;h3 id="6-添加github-actions">6. 添加GitHub Actions&lt;/h3>
+&lt;p>终于到了关键的一步，网络上的教程大多是通过GitHub Actions将源码发布到仓库中，公开源代码，但是对于我而言，我更希望将源代码隐藏起来，将发布网页的代码公开，因而我使用了如下的GitHub Actions。需要在博客源码对应的仓库中找到 &lt;code>Actions&lt;/code> 的菜单，点击并创建一个新的 Workflow ，将代码替换为如下代码。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github pages&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">main # Set a branch to deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">pull_request&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-20.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch Hugo themes (true OR recursive)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch all history for .GitInfo and .Lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;latest&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Use Hugo-extended&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">if&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github.ref == &amp;#39;refs/heads/main&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">personal_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.PERSONAL_TOKEN }} # Use PERSONAL_TOKEN&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public # Select the folder contain your website&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">external_repository&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">&amp;lt;GitHub User Name&amp;gt;/&amp;lt;Github Repository&amp;gt; # Select the repository you want to publish&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_branch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">master &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Select the branch you want to publish&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其中，&lt;code>on -&amp;gt; push -&amp;gt; branches&lt;/code> 下选择源码仓库中对应的分支。在&lt;code>jobs -&amp;gt; deploy -&amp;gt; steps&lt;/code> 下的 &lt;code>Setup Hugo&lt;/code> 步骤中，&lt;code>extended&lt;/code> 表明需要使用 &lt;code>Hugo-extended&lt;/code> 包进行构建；在 &lt;code>Deploy&lt;/code> 步骤中，&lt;code>publish_dir&lt;/code> 是需要发布网站代码的位置，在 Hugo 中为 &lt;code>./public&lt;/code> ； &lt;code>external_repository&lt;/code> 为存放网站代码的仓库，按照代码中的格式设置即可； &lt;code>publish_branch&lt;/code> 即发布在网站代码的仓库中的分支名。详细的配置可以查看后面附带的文档。&lt;sup id="fnref:1">&lt;a href="https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
+&lt;p>修改完后，点击 &lt;code>Start Commit&lt;/code> 就会自动进行代码的构建发布了！你可以在博客源码的仓库中选择 Actions ，查看你的 GitHub Actions运行的流程，不放心的话，还可以在博客源码的仓库进行一次 push 操作。&lt;/p>
 &lt;hr>
 &lt;section class="footnotes" role="doc-endnotes">
 &lt;hr>
