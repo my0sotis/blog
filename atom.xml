@@ -1,4 +1,216 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><title type="text">Mlog</title><subtitle type="html">Mlog 是我的技术博客，期望学习到更多更新的知识~</subtitle><updated>2021-12-01T06:24:43+00:00</updated><id>https://my0sotis.github.io/blog/</id><link rel="alternate" type="text/html" href="https://my0sotis.github.io/blog/"/><link rel="self" type="application/atom+xml" href="https://my0sotis.github.io/blog/atom.xml"/><author><name>Mavericks</name><uri>https://my0sotis.github.io/</uri><email>my0sotis@qq.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.89.4">Hugo</generator><entry><title type="text">GitHub Actions 驱动的博客构建</title><link rel="alternate" type="text/html" href="https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/"/><id>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</id><updated>2021-12-01T06:24:41+00:00</updated><published>2021-11-30T00:00:00+00:00</published><author><name>Mavericks</name><uri>https://my0sotis.github.io/blog/</uri><email>my0sotis@qq.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客……</summary><content type="html">&lt;p>此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客，便只能通过项目创建GitHub Pages，但是这样的话就会出现一个问题，如果不将源码公开的话就无法将博客展示出来，但是我并不确定源码中什么东西是不能够公开的 &lt;s>（之前为了方便甚至将SSH公钥和私钥放在公开的博客仓库中，在同学提醒下才删除）&lt;/s>，于是想将源码和构建出来的代码仓库分离的想法。再者，为了便利的进行博客的构建发布，便考虑使用GitHub Actions自动化地进行持续集成开发。&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><title type="text">Mlog</title><subtitle type="html">Mlog 是我的技术博客，期望学习到更多更新的知识~</subtitle><updated>2021-12-02T16:27:00+00:00</updated><id>https://my0sotis.github.io/blog/</id><link rel="alternate" type="text/html" href="https://my0sotis.github.io/blog/"/><link rel="self" type="application/atom+xml" href="https://my0sotis.github.io/blog/atom.xml"/><author><name>Mavericks</name><uri>https://my0sotis.github.io/</uri><email>my0sotis@qq.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.89.4">Hugo</generator><entry><title type="text">PyTorch下神经网络构建的基本结构</title><link rel="alternate" type="text/html" href="https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/"/><id>https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/</id><updated>2021-12-02T16:26:57+00:00</updated><published>2021-12-02T00:00:00+00:00</published><author><name>Mavericks</name><uri>https://my0sotis.github.io/blog/</uri><email>my0sotis@qq.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">本文主要参考李宏毅2021春机器学习课程中的 PyTorch 教学内容，详细内容可查看李宏毅2021……</summary><content type="html">&lt;blockquote class="quote zh">
+&lt;p>本文主要参考李宏毅2021春机器学习课程中的 PyTorch 教学内容，详细内容可查看李宏毅2021春机器学习课程官网和&lt;a href="https://www.bilibili.com/video/BV1Wv411h7kN?p=5">李宏毅2021春机器学习课程视频&lt;/a>。&lt;/p>&lt;/blockquote>
+&lt;p>使用 PyTorch 构建神经网络模型主要分为几个部分，即导入数据、定义网络结构及损失函数等、训练模型、验证模型和测试模型&lt;sup id="fnref:1">&lt;a href="https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。下面通过代码的范例进行介绍&lt;/p>
+&lt;h2 id="导入数据">导入数据&lt;/h2>
+&lt;p>通过 PyTorch 导入数据需要引入两个模块，即 &lt;code>Dataset&lt;/code> 和 &lt;code>DataLoader&lt;/code> ，他们在 &lt;code>torch.utils.data&lt;/code> 包下。一般我们会对导入的数据进行一定的处理，因此我们最好创建一个 &lt;code>Dataset&lt;/code> 的子类以便自己的操作，实现这样一个子类我们需要完成如下的内容。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">from&lt;/span> &lt;span class="nn">torch.utils.data&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Dataset&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">DataLoader&lt;/span>
+&lt;span class="k">class&lt;/span> &lt;span class="nc">MyDataset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Dataset&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="fm">__init__&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">...&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="fm">__getitem__&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">index&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="fm">__len__&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这样一个类仅为参考，包含几个函数的作用分别为：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>__init__(self, file)&lt;/code> ：读取对应文件，并对文件中的数据进行一定的预处理。&lt;/li>
+&lt;li>&lt;code>__getitem__(self, index)&lt;/code> ：根据给定的 index 返回对应的数据。&lt;/li>
+&lt;li>&lt;code>__len__(self)&lt;/code> ：返回数据集的大小。&lt;/li>
+&lt;/ul>
+&lt;p>创建了这样一个数据集的类，我们需要将其导入到 &lt;code>DataLoader&lt;/code> 中，相应的操作如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">dataset&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MyDataset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">dataloader&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">DataLoader&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dataset&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">shuffle&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>DataLoader 中需要传入对应的 Dataset 对象，指定一个 &lt;code>batch_size&lt;/code> ，由于在 PyTorch 中，训练模型时，并非将一整个数据集全部进行运算后在对模型进行优化，而是在数据集中分别多次取一个 &lt;code>batch_size&lt;/code> 的数据进行预测，并进行后续的优化的，同时这样设计也更利于进行并行运算，以便使用 GPU 进行加速运算。&lt;code>shuffle&lt;/code> 参数表明是否需要将数据打乱，一般而言在训练过程中，我们会要求打乱数据，而在测试过程中不进行打乱的操作，以防出现误差。&lt;/p>
+&lt;h2 id="定义网络结构">定义网络结构&lt;/h2>
+&lt;p>在此处的定义网络结构是包含神经网络、损失函数和优化器的所有配置。范例代码如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch.nn&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">nn&lt;/span>
+&lt;span class="k">class&lt;/span> &lt;span class="nc">MyModel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Module&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="fm">__init__&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyModel&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="fm">__init__&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="c1"># Define Neural Network&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">net&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Sequential&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Linear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">32&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Sigmoid&lt;/span>&lt;span class="p">(),&lt;/span>
+&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Linear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">32&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># Forward Pass&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">forward&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># Contruct Model and Move to device (cpu/cuda)&lt;/span>
+&lt;span class="n">model&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MyModel&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># Set Loss Function&lt;/span>
+&lt;span class="n">criterion&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">MSELoss&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="c1"># Set Optimizer&lt;/span>
+&lt;span class="n">optimizer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">optim&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">SGD&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parameters&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="mf">0.1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>首先，我们通过继承 &lt;code>nn.Module&lt;/code> 类，定义一个网络结构，通过PyTorch文档&lt;sup id="fnref:2">&lt;a href="https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>我们可知，主要需要构造的有两个函数，即 &lt;code>__init__&lt;/code> 和 &lt;code>forward&lt;/code> 函数。我们需要在 &lt;code>__init__&lt;/code> 函数中通过在 &lt;code>nn.Sequential&lt;/code> 中按需对网络层级结构进行添加；在 &lt;code>forward&lt;/code> 函数中定义神经网络的前向传播，即通过模型进行预测的过程。定义完相关模型后，在后续我们需要调用这个模型，并转化为对应设备的模型（CPU或者CUDA）。损失函数方面此处我们使用了 &lt;code>nn.MSELoss()&lt;/code> 均方损失函数，也可按需改成对应的损失函数。优化器则选定最为经典的随机梯度下降，在优化器中我们需要传入所有模型的参数以及学习率。&lt;/p>
+&lt;h2 id="训练模型">训练模型&lt;/h2>
+&lt;p>训练模型的代码可如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">for&lt;/span> &lt;span class="n">epoch&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n_epoch&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="c1"># Iterate n_epochs&lt;/span>
+&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">train&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Set model to train model&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">tr_set&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="c1"># Iterate through the dataloader&lt;/span>
+&lt;span class="n">optimizer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">zero_grad&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Set gradient to zero&lt;/span>
+&lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Move data to device (cpu/cuda)&lt;/span>
+&lt;span class="n">pred&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Forward pass (compute output)&lt;/span>
+&lt;span class="n">loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">criterion&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pred&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Compute loss&lt;/span>
+&lt;span class="n">loss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">backward&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Compute gradient (backpropagation)&lt;/span>
+&lt;span class="n">optimizer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">step&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Update model with optimizer&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>根据所需，设定需要跑几次 &lt;code>n_epoch&lt;/code> ，将模型调至训练模型，并遍历训练集的数据，一般而言，我们是会循环训练数据集中 &lt;code>batch_size&lt;/code> 个数据，将优化器的梯度重置为 0 ，以防上一次计算的梯度影响到本次计算；通过模型得到预测值，并与真实值相比，通过损失函数计算出损失，再通过调用 &lt;code>backward()&lt;/code> 函数进行梯度的运算，最终通过优化器的 &lt;code>step()&lt;/code> 函数将模型进行更新。&lt;/p>
+&lt;h2 id="验证模型">验证模型&lt;/h2>
+&lt;p>验证模型的代码可如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">eval&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Set model to evaluation mode&lt;/span>
+&lt;span class="n">total_loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">dv_set&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="c1"># Iterate through the dataloader&lt;/span>
+&lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Move data to device (cpu/cuda)&lt;/span>
+&lt;span class="k">with&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">no_grad&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="c1"># Disable gradient calculation&lt;/span>
+&lt;span class="n">pred&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Forward pass (compute output) &lt;/span>
+&lt;span class="n">loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">criterion&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pred&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Compute loss&lt;/span>
+&lt;span class="n">total_loss&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">loss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Accumulate loss&lt;/span>
+&lt;span class="n">avg_loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">total_loss&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dv_set&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dataset&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Compute averaged loss&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>首先需要把模型设定为评估状态，验证模型时，暂不需要对模型进行梯度操作，仅是评估当前状态下模型的优劣，因而模型只是进行预测并计算损失，最终计算出平均的损失以评价模型。&lt;/p>
+&lt;h2 id="测试模型">测试模型&lt;/h2>
+&lt;p>测试模型方面则是在验证模型的代码下更为精简，无需统计平均损失（当然有需要的话也可以统计），范例代码如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">eval&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Set model to evaluation mode&lt;/span>
+&lt;span class="n">total_loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">dv_set&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="c1"># Iterate through the dataloader&lt;/span>
+&lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Move data to device (cpu/cuda)&lt;/span>
+&lt;span class="k">with&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">no_grad&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="c1"># Disable gradient calculation&lt;/span>
+&lt;span class="n">pred&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Forward pass (compute output) &lt;/span>
+&lt;span class="n">loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">criterion&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pred&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Collect prediction&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="存储载入模型">存储/载入模型&lt;/h2>
+&lt;ul>
+&lt;li>存储模型&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">state_dict&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Path need to be specified&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>载入模型&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">ckpt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Path need to be specified&lt;/span>
+&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load_state_dict&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ckpt&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>&lt;a href="https://speech.ee.ntu.edu.tw/~hylee/ml/2021-spring.html">ML 2021 Spring (ntu.edu.tw)&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2" role="doc-endnote">
+&lt;p>&lt;a href="https://pytorch.org/docs/stable/index.html">PyTorch documentation — PyTorch 1.10.0 documentation&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></content><category scheme="https://my0sotis.github.io/blog/tech/" term="tech" label="tech"/><category scheme="https://my0sotis.github.io/blog/tags/pytorch/" term="PyTorch" label="PyTorch"/><category scheme="https://my0sotis.github.io/blog/tags/nn/" term="NN" label="NN"/></entry><entry><title type="text">GitHub Actions 驱动的博客构建</title><link rel="alternate" type="text/html" href="https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/"/><id>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</id><updated>2021-12-02T16:26:57+00:00</updated><published>2021-11-30T00:00:00+00:00</published><author><name>Mavericks</name><uri>https://my0sotis.github.io/blog/</uri><email>my0sotis@qq.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客……</summary><content type="html">&lt;p>此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客，便只能通过项目创建GitHub Pages，但是这样的话就会出现一个问题，如果不将源码公开的话就无法将博客展示出来，但是我并不确定源码中什么东西是不能够公开的 &lt;s>（之前为了方便甚至将SSH公钥和私钥放在公开的博客仓库中，在同学提醒下才删除）&lt;/s>，于是想将源码和构建出来的代码仓库分离的想法。再者，为了便利的进行博客的构建发布，便考虑使用GitHub Actions自动化地进行持续集成开发。&lt;/p>
 &lt;h2 id="demands">Demands&lt;/h2>
 &lt;ol>
 &lt;li>源码与生成网站代码分析，于我而言则是，源码在一个 &lt;code>private&lt;/code> 的仓库，生成出来的网站文件存放在一个 &lt;code>public&lt;/code> 的仓库中用以作为 GitHub Pages 的展示页面。&lt;/li>
@@ -119,7 +331,7 @@
 &lt;hr>
 &lt;center>雄关漫道真如铁，而今迈步从头越。&lt;/center>
 &lt;hr>
-&lt;center>此篇记于研一伊始，惟愿毕业无悔而已。&lt;/center></content><category scheme="https://my0sotis.github.io/blog/life/" term="life" label="life"/></entry><entry><title type="text">Powered By Hugo</title><link rel="alternate" type="text/html" href="https://my0sotis.github.io/blog/tech/powered-by-hugo/"/><id>https://my0sotis.github.io/blog/tech/powered-by-hugo/</id><updated>2021-11-30T12:37:27+08:00</updated><published>2021-11-29T00:00:00+00:00</published><author><name>Mavericks</name><uri>https://my0sotis.github.io/blog/</uri><email>my0sotis@qq.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">距离上次更新博客已一年有余，在忙碌完毕业升学的种种之后，又有重拾博客的念头，于忙里偷……</summary><content type="html">&lt;p>距离上次更新博客已一年有余，在忙碌完毕业升学的种种之后，又有重拾博客的念头，于忙里偷闲中重构了一个新的博客，从以前使用 Hexo+NexT 逐步转向 Hugo+MemE ，现今已是全面 Powered By Hugo 了！&lt;/p>
+&lt;center>此篇记于研一伊始，惟愿毕业无悔而已。&lt;/center></content><category scheme="https://my0sotis.github.io/blog/life/" term="life" label="life"/></entry><entry><title type="text">Powered By Hugo</title><link rel="alternate" type="text/html" href="https://my0sotis.github.io/blog/tech/powered-by-hugo/"/><id>https://my0sotis.github.io/blog/tech/powered-by-hugo/</id><updated>2021-12-03T00:26:35+08:00</updated><published>2021-11-29T00:00:00+00:00</published><author><name>Mavericks</name><uri>https://my0sotis.github.io/blog/</uri><email>my0sotis@qq.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">距离上次更新博客已一年有余，在忙碌完毕业升学的种种之后，又有重拾博客的念头，于忙里偷……</summary><content type="html">&lt;p>距离上次更新博客已一年有余，在忙碌完毕业升学的种种之后，又有重拾博客的念头，于忙里偷闲中重构了一个新的博客，从以前使用 Hexo+NexT 逐步转向 Hugo+MemE ，现今已是全面 Powered By Hugo 了！&lt;/p>
 &lt;p>重构博客并非一时兴起，而是有多方面的原因。&lt;/p>
 &lt;p>一方面，之前在使用 Hexo+NexT 时，怀着满腔热情对 NexT 做了许多大刀阔斧的修改，将当时版本的博客打磨成了自己最为满意的版本，但是随着时间的推移，老旧版本的许多弊端便显现出来，无法拥有全新版本许多新的特性，但是要升级的话，需要重新对主题进行修改（因为此前的修改都是基于主题原文件进行的，使用 &lt;code>git submodule update&lt;/code> 未免会将原有的修改覆盖），出于对新特性的追求，在原博客的仓库中新创建了一个分支，使用了当时新版本的 Hexo和NexT ，继续进行修改，不知是 &lt;code>node_modules&lt;/code> 污染了主分支上原有的博客源码还是如何，导致当时的博客无法正常启动，&lt;s>虽然我现在找回来了&lt;/s>，于是萌生了使用其他博客框架的想法。&lt;/p>
 &lt;p>先前为了使博客的文字更加美观，参考了 &lt;a href="https://io-oi.me/tech/noto-serif-sc-added-on-google-fonts/">Google Fonts 已支持思源宋体！ | reuixiy (io-oi.me)&lt;/a> 这篇文章，看到这个博客时便被深深地吸引了，当即安装了 Hugo，并下载了 &lt;a href="https://io-oi.me/">此博客&lt;/a> 的主题，也就是 MemE ，但由于正值毕业和升学期间，实在分身乏术，就暂且搁置了。直至现今偷得浮生一日闲🤪，难得有时间整理博客，便在原先的基础上修改完善了博客直至现在这番模样。&lt;/p>
