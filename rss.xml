@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.101.0 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Thu, 18 Aug 2022 01:37:18 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>GitHub Actions驱动的SpringBoot项目构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</guid><pubDate>Thu, 18 Aug 2022 09:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>先前尝试使用GitHub Actions进行过博客的自动部署发布，GitHub Actions集自动化构建、部署、发布于一体，仅需编写简短的YAML文件，便可实现持续集成发布，非常便捷高效，仅需在分支上进行一次&lt;code>push&lt;/code>操作，就能够自动的发布到先上去。之前只是将静态的网页发布到GitHub Pages上，而本文尝试一些更为复杂的操作，即SpringBoot项目的持续集成构建部署发布。&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.101.0 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Thu, 18 Aug 2022 05:32:23 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>Hugo与时差</title><link>https://my0sotis.github.io/blog/tech/hugo%E4%B8%8E%E6%97%B6%E5%B7%AE/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/hugo%E4%B8%8E%E6%97%B6%E5%B7%AE/</guid><pubDate>Thu, 18 Aug 2022 13:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>是日晚上，我在写完上一篇博客时，没有本地预览便直接提交到了GitHub分支上，打算等待GitHub Actions执行完直接在手机上进行预览。不出意外的话就要出意外了，我刷新了好几次都没有看到我新发的博文，便在本地运行&lt;code>hugo server&lt;/code>，依旧是没有新的博客。&lt;/p>
+&lt;p>我博文的Front Matter如下所示：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="err">+++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;GitHub Actions驱动的SpringBoot项目构建&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">tags&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;GitHub Actions&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;SpringBoot&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">date&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;2022-08-18&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">gitinfo&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">+++&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>看出问题了吗？&lt;/p>
+&lt;p>关键之处就在于这个&lt;code>date&lt;/code>，为了方便，我没有填写时区信息。中国所在的时区为&lt;code>UTC+8&lt;/code>，没有指定时区的话默认是&lt;code>UTC&lt;/code>时间。我发布博客的时间是在北京时间8月18日凌晨，此时的&lt;code>UTC&lt;/code>时间还是8月17日，因而在Hugo执行过程中，判定我这篇博文应该是未来发布的，因而并不会被渲染出来。&lt;/p>
+&lt;p>当然，如果为了方便不愿意每次在博文的Front Matter中的&lt;code>date&lt;/code>中填写时区信息，可以在&lt;code>config.toml&lt;/code>中添加如下配置：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">buildFuture&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>也可以在使用Hugo命令构建博客的时候，加上&lt;code>--buildFuture&lt;/code>参数，以构建生成&lt;strong>未来&lt;/strong>发布的博客。&lt;/p></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hugo/">Hugo</category></item><item><title>GitHub Actions驱动的SpringBoot项目构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</guid><pubDate>Thu, 18 Aug 2022 09:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>先前尝试使用GitHub Actions进行过博客的自动部署发布，GitHub Actions集自动化构建、部署、发布于一体，仅需编写简短的YAML文件，便可实现持续集成发布，非常便捷高效，仅需在分支上进行一次&lt;code>push&lt;/code>操作，就能够自动的发布到先上去。之前只是将静态的网页发布到GitHub Pages上，而本文尝试一些更为复杂的操作，即SpringBoot项目的持续集成构建部署发布。&lt;/p>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
 &lt;ul>
 &lt;li>Git&lt;/li>
