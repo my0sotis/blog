@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.101.0 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Wed, 24 Aug 2022 17:10:13 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>Go语言中的性能优化</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid><pubDate>Sat, 20 Aug 2022 23:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;blockquote class="quote">
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.101.0 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sat, 27 Aug 2022 17:09:10 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>局部敏感哈希</title><link>https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/</guid><pubDate>Thu, 25 Aug 2022 23:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>传统哈希算法目的是减少冲突以加速增删改查的速度，而此处介绍的局部敏感哈希（Locality Sensitive Hash）旨在最大化哈希冲突，尽可能保证以更高概率将相似的输入项散列到相同的桶中。通过这么一种哈希算法，我们可以将高维的数据映射到一个低维的向量空间，同时也能保证在一定概率下，原有向量空间相似的输入项在映射后的向量空间中仍然相似。LSH算法可用于数据聚类和最近邻搜索，在实际场景中，LSH算法常用于信息检索、数据挖掘、推荐系统以及视觉相似性排名等应用。&lt;/p>
+&lt;h2 id="定义">定义&lt;/h2>
+&lt;p>对于一个LSH的哈希算法族（原文为：LSH Family）$\mathcal{F}$，定义度量空间$\mathcal{M}=(M,d)$，阈值$R&amp;gt;0$，近似因子$c&amp;gt;1$，以及概率$P_1,P_2$。$\mathcal{F}$是一个函数的集合，其中的函数$h:M\rightarrow S$将度量空间的元素映射到桶中$s\in S$。一个LSH算法族应满足如下条件，对于在度量空间$M$的两个点$p,q\in M$，以及从$\mathcal{F}$中随机选取的任意一个散列函数$h$:&lt;/p>
+&lt;ol>
+&lt;li>如果$d(p,q)\le R$，那么$h(p)=h(q)$的概率&lt;strong>至少&lt;/strong>为$P_1$。（例如$p,q$为同一个点）&lt;/li>
+&lt;li>如果$d(p,q)\ge R$，那么$h(p)=h(q)$的概率&lt;strong>至多&lt;/strong>为$P_2$。&lt;/li>
+&lt;/ol>
+&lt;p>当$P_1\gt P_2$时，这个LSH算法族是有意义的。这样一个LSH算法族$\mathcal{F}$被称为是$(R,cR,P_1,P_2)$-敏感的。&lt;/p>
+&lt;h2 id="方法">方法&lt;/h2>
+&lt;p>LSH算法有很多方法，包括汉明距离的位采样、MinHash&lt;sup id="fnref:1">&lt;a href="https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>、Nilsimsa Hash&lt;sup id="fnref:2">&lt;a href="https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>、TLSH以及SimHash等。其中较为经典的方法为SimHash，本文也主要介绍SimHash的思想。&lt;/p>
+&lt;p>SimHash是Google于2007年在Detecting near-duplicates for web crawling&lt;sup id="fnref:3">&lt;a href="https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>这篇论文中提出，目的是为了解决海量网页的去重任务。SimHash通常用于长文本，将长文本压缩成几个关键词来代表，再将这些关键词编码为定长的二进制字符串，通过这样的编码，我们如需要查询文章，仅需通过相同方法查询对应的编码即可。&lt;/p>
+&lt;h3 id="simhash的步骤">SimHash的步骤&lt;/h3>
+&lt;h4 id="分词">分词&lt;/h4>
+&lt;p>分词部分可以调用各语言的库，如jieba（Python）、GoJieba（Golang）等，此处不做过多描述。&lt;/p>
+&lt;h4 id="tf-idf">TF-IDF&lt;/h4>
+&lt;p>TF-IDF（term frequency–inverse document frequency）是一种用于信息检索与数据挖掘的常用加权技术，可以统计一字词对于一个文件集或一个语料库中的其中一份文件的重要程度，TF-IDF算法在网上也可搜到相关信息。&lt;/p>
+&lt;h4 id="hash">Hash&lt;/h4>
+&lt;p>得到的关键词以及其TF-IDF权重后，对第$i$个关键词进行编码，对其进行Hash后得到一个N位的二进制串，定义一个N位的新二进制串$s_i$，对每个Hash后的二进制串逐位进行处理，对应位为0的，将$s_i$中对应位置置为该关键词权重的负数；对应位为1的，将$s_i$中对应位置置为该关键词权重，最后将该文章中所有关键词的二进制串$s_i$进行逐位的累加得到一个最终的二进制串$s$，针对该二进制串，我们同样进行逐位的处理，如果第$i$的值为正数，我们最终SimHash的值的第$i$的值置为1；如果第$i$的值为负数，我们最终SimHash的值的第$i$的值置为0。如此一来，我们便得到了最终的SimHash值。&lt;/p>
+&lt;h4 id="计算相似度">计算相似度&lt;/h4>
+&lt;p>最终我们如果想计算两篇文章的相似度时，我们就可以计算两篇文章的SimHash值，将海量高维数据计算相似度的问题转换为计算低维数据相似度的问题。计算两个SimHash的相似度通常使用汉明距离，汉明距离即二进制位相同的位数，如果相同的位数高于一定阈值，我们便可认为两篇文章相似。&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>&lt;a href="https://en.wikipedia.org/wiki/MinHash">MinHash - Wikipedia&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2">
+&lt;p>&lt;a href="https://en.wikipedia.org/wiki/Nilsimsa_Hash">Nilsimsa Hash - Wikipedia&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:3">
+&lt;p>&lt;a href="https://dl.acm.org/doi/abs/10.1145/1242572.1242592">Detecting near-duplicates for web crawling | Proceedings of the 16th international conference on World Wide Web&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hash/">Hash</category></item><item><title>Go语言中的性能优化</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid><pubDate>Sat, 20 Aug 2022 23:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;blockquote class="quote">
 &lt;p>性能优化，简而言之，就是在不影响系统运行正确性的前提下，使之运行地更快，完成特定功能所需的时间更短。&lt;/p>&lt;/blockquote>
 &lt;h1 id="正确高效使用数据结构">正确高效使用数据结构&lt;/h1>
 &lt;h2 id="正确使用slice">正确使用Slice&lt;/h2>
@@ -184,7 +217,7 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">buildFuture&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>也可以在使用Hugo命令构建博客的时候，加上&lt;code>--buildFuture&lt;/code>参数，以构建生成..未来..发布的博客。&lt;/p></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hugo/">Hugo</category></item><item><title>GitHub Actions驱动的SpringBoot项目构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</guid><pubDate>Thu, 18 Aug 2022 09:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>先前尝试使用GitHub Actions进行过博客的自动部署发布，GitHub Actions集自动化构建、部署、发布于一体，仅需编写简短的YAML文件，便可实现持续集成发布，非常便捷高效，仅需在分支上进行一次&lt;code>push&lt;/code>操作，就能够自动的发布到先上去。之前只是将静态的网页发布到GitHub Pages上，而本文尝试一些更为复杂的操作，即SpringBoot项目的持续集成构建部署发布。&lt;/p>
+&lt;/div>&lt;p>也可以在使用Hugo命令构建博客的时候，加上&lt;code>--buildFuture&lt;/code>参数，以构建生成..未来..发布的博客。&lt;/p></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hugo/">Hugo</category></item><item><title>GitHub Actions驱动的SpringBoot项目构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</guid><pubDate>Wed, 17 Aug 2022 09:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>先前尝试使用GitHub Actions进行过博客的自动部署发布，GitHub Actions集自动化构建、部署、发布于一体，仅需编写简短的YAML文件，便可实现持续集成发布，非常便捷高效，仅需在分支上进行一次&lt;code>push&lt;/code>操作，就能够自动的发布到先上去。之前只是将静态的网页发布到GitHub Pages上，而本文尝试一些更为复杂的操作，即SpringBoot项目的持续集成构建部署发布。&lt;/p>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
 &lt;ul>
 &lt;li>Git&lt;/li>
