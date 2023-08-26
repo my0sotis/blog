@@ -1,4 +1,169 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.115.1 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Wed, 05 Jul 2023 16:24:33 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>Go语言中更为优雅的动态配置</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</guid><pubDate>Mon, 03 Jul 2023 22:55:19 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在开发过程中，需要构造一个对象（结构体）时，总是需要传递一些必要的参数以使其正常运行。在Go标准库中，往往会直接暴露字段，在构造的时候能够直接传入。&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.117.0 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sat, 26 Aug 2023 10:53:14 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>Windows下多版本Go语言环境</title><link>https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</guid><pubDate>Sat, 26 Aug 2023 16:52:39 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在 Go 语言的日常开发过程中，我们往往需要同时使用到多个版本的 Go 语言开发不同项目 。在MacOS下，可以通过 &lt;a href="https://brew.sh/">HomeBrew&lt;/a> 管理不同版本的 Go 语言，可以通过&lt;code>brew link&lt;/code>快速切换 Go 版本。但是 Windows 无法安装 HomeBrew ，且 Windows 上的一些包管理工具有的不支持多版本管理，有的没有紧跟 Go 语言的发行（截至目前， scoop 上 Go 的版本还是&lt;code>1.19.3&lt;/code>）。下面介绍两种 Windows 下多版本 Go 语言环境配置方案。&lt;/p>
+&lt;h1 id="go-官方的多版本管理">Go 官方的多版本管理&lt;/h1>
+&lt;blockquote>
+&lt;p>&lt;a href="https://go.dev/doc/manage-install">Managing Go installations - The Go Programming Language&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>为解决不同平台使用多版本 Go 语言的需求，且尽可能不依赖于其他工具，Go 官方提供了通过&lt;code>go install&lt;/code>安装额外版本的方案。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ go install golang.org/dl/go1.10.7@latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go1.10.7 download
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ go1.10.7 version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go version go1.10.7 linux/amd64d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>通过&lt;code>go install golang.org/dl/go{{version}}@latest&lt;/code>，修改其中的&lt;code>{{version}}&lt;/code>指定使用的版本即可。后续使用不同版本的 Go 可以使用&lt;code>go{{version}}&lt;/code>来代替。如果想修改默认的 Go 版本，可以通过修改 &lt;code>Path&lt;/code>环境变量（Windows下），抑或是做一个软连接。&lt;/p>
+&lt;h1 id="g">g&lt;/h1>
+&lt;blockquote>
+&lt;p>&lt;a href="https://github.com/voidint/g">voidint/g: Golang Version Manager&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Go 官方提供的多版本管理工具使用起来还是稍微复杂了些，不仅需要记忆下载的地址前缀，还要时刻记住版本号。好在社区也提供了一个 Go 语言的多版本管理工具&lt;code>g&lt;/code>。&lt;code>g&lt;/code>是一个支持在Linux、MacOS及Windows下使用的一个命令行工具，可以提供便捷的 Go 语言多版本环境的管理与切换。&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;h3 id="自动化安装">自动化安装&lt;/h3>
+&lt;p>使用Powershell可以输入如下命令自动化安装：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ iwr https://raw.githubusercontent.com/voidint/g/master/install.ps1 -useb &lt;span class="p">|&lt;/span> iex
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="手动安装">手动安装&lt;/h3>
+&lt;p>&lt;code>g&lt;/code>默认安装在&lt;code>~/.g&lt;/code>目录下，如果需要自定义安装目录的话，则需要手动的安装并进行配置。从&lt;a href="https://github.com/voidint/g/releases/tag/v1.5.1">Release · voidint/g&lt;/a>中下载指定版本的二进制压缩包，解压到指定目录的 &lt;code>bin&lt;/code>子目录下，之后需要进行一些环境变量的配置。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:G_EXPERIMENTAL&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:G_HOME&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;{{targetDir}}\g&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:G_MIRROR&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;https://golang.google.cn/dl/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:GOROOT&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;{{targetDir}}\g\go&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:GOPATH&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;{{pathDir}}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:Path&lt;span class="o">=&lt;/span>-join&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$env&lt;/span>&lt;span class="s2">:G_HOME\bin&amp;#34;&lt;/span>, &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$env&lt;/span>&lt;span class="s2">:GOROOT\bin;&amp;#34;&lt;/span>, &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$env&lt;/span>&lt;span class="s2">:GOPATH\bin&amp;#34;&lt;/span>, &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$env&lt;/span>&lt;span class="s2">:Path&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>由于自定义&lt;code>g&lt;/code>的安装目录尚属于实验特性&lt;sup id="fnref:1">&lt;a href="https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>，必须先设定&lt;code>G_EXPERIMENTAL&lt;/code>为&lt;code>true&lt;/code>才可指定，&lt;code>G_HOME&lt;/code>即为指定的&lt;code>g&lt;/code>的安装目录，由于国内下载 Go 语言官方仓库的包网络不稳定，因此通过&lt;code>G_MIRROR&lt;/code>可以指定镜像地址。&lt;code>GOROOT&lt;/code>需指定为&lt;code>g&lt;/code>安装目录下的&lt;code>go&lt;/code>子目录，&lt;code>GOPATH&lt;/code>则安装各自所需设定。最后再将&lt;code>G_HOME&lt;/code>、&lt;code>GOROOT&lt;/code>和&lt;code>GOPATH&lt;/code>的&lt;code>bin&lt;/code>子目录加入&lt;code>Path&lt;/code>环境变量中即可。&lt;/p>
+&lt;h2 id="使用">使用&lt;/h2>
+&lt;p>查询当前可用的所有版本或是&lt;code>stable&lt;/code>状态的 Go 版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ g ls-remote &lt;span class="c1"># list all versions of go&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ g ls-remote stable &lt;span class="c1"># list all stable versions of go&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1.20.7
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1.21.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>安装指定Go版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ g install 1.21.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Downloading 100% &lt;span class="o">[===============]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Computing checksum with SHA256
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Checksums matched
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Now using go1.21.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>查询已安装的Go版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ g ls
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1.18.10
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1.19.12
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1.20.7
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">* 1.21.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>切换Go版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ g use 1.20.7
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go version go1.20.7 windows/amd64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>卸载指定版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ g uninstall 1.19.12
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Uninstalled go1.19.12
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>清除Go安装包缓存，由于&lt;code>g&lt;/code>安装后并不会主动清理安装文件，因此建议安装后执行。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ g clean
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>更新&lt;code>g&lt;/code>及卸载&lt;code>g&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ g self update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">You are up to date! g v1.5.1 is the latest version.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ g self uninstall
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>&lt;a href="https://github.com/voidint/g/issues/18">支持环境变量G_HOME自定义g目录 · Issue #18 · voidint/g&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/golang/">Golang</category></item><item><title>Go语言中更为优雅的动态配置</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</guid><pubDate>Mon, 03 Jul 2023 22:55:19 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在开发过程中，需要构造一个对象（结构体）时，总是需要传递一些必要的参数以使其正常运行。在Go标准库中，往往会直接暴露字段，在构造的时候能够直接传入。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
