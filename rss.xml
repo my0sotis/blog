@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.117.0 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>my0sotis@qq.com (Mavericks)</managingEditor><webMaster>my0sotis@qq.com (Mavericks)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sat, 26 Aug 2023 10:53:14 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>Windows下多版本Go语言环境</title><link>https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</guid><pubDate>Sat, 26 Aug 2023 16:52:39 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在 Go 语言的日常开发过程中，我们往往需要同时使用到多个版本的 Go 语言开发不同项目 。在MacOS下，可以通过 &lt;a href="https://brew.sh/">HomeBrew&lt;/a> 管理不同版本的 Go 语言，可以通过&lt;code>brew link&lt;/code>快速切换 Go 版本。但是 Windows 无法安装 HomeBrew ，且 Windows 上的一些包管理工具有的不支持多版本管理，有的没有紧跟 Go 语言的发行（截至目前， scoop 上 Go 的版本还是&lt;code>1.19.3&lt;/code>）。下面介绍两种 Windows 下多版本 Go 语言环境配置方案。&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mlog</title><link>https://my0sotis.github.io/blog/</link><description>Mlog 是我的技术博客，期望学习到更多更新的知识~</description><generator>Hugo 0.136.2 https://gohugo.io/</generator><language>zh-CN</language><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Fri, 18 Oct 2024 17:14:15 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://my0sotis.github.io/blog/rss.xml"/><item><title>Windows下多版本Go语言环境</title><link>https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</guid><pubDate>Sat, 26 Aug 2023 16:52:39 +0800</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在 Go 语言的日常开发过程中，我们往往需要同时使用到多个版本的 Go 语言开发不同项目 。在MacOS下，可以通过 &lt;a href="https://brew.sh/">HomeBrew&lt;/a> 管理不同版本的 Go 语言，可以通过&lt;code>brew link&lt;/code>快速切换 Go 版本。但是 Windows 无法安装 HomeBrew ，且 Windows 上的一些包管理工具有的不支持多版本管理，有的没有紧跟 Go 语言的发行（截至目前， scoop 上 Go 的版本还是&lt;code>1.19.3&lt;/code>）。下面介绍两种 Windows 下多版本 Go 语言环境配置方案。&lt;/p>
 &lt;h1 id="go-官方的多版本管理">Go 官方的多版本管理&lt;/h1>
 &lt;blockquote>
 &lt;p>&lt;a href="https://go.dev/doc/manage-install">Managing Go installations - The Go Programming Language&lt;/a>&lt;/p>
@@ -163,7 +163,7 @@
 &lt;p>&lt;a href="https://github.com/voidint/g/issues/18">支持环境变量G_HOME自定义g目录 · Issue #18 · voidint/g&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/windows%E4%B8%8B%E5%A4%9A%E7%89%88%E6%9C%ACgo%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/golang/">Golang</category></item><item><title>Go语言中更为优雅的动态配置</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</guid><pubDate>Mon, 03 Jul 2023 22:55:19 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在开发过程中，需要构造一个对象（结构体）时，总是需要传递一些必要的参数以使其正常运行。在Go标准库中，往往会直接暴露字段，在构造的时候能够直接传入。&lt;/p>
+&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/golang/">Golang</category></item><item><title>Go语言中更为优雅的动态配置</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/</guid><pubDate>Mon, 03 Jul 2023 22:55:19 +0800</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在开发过程中，需要构造一个对象（结构体）时，总是需要传递一些必要的参数以使其正常运行。在Go标准库中，往往会直接暴露字段，在构造的时候能够直接传入。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -401,7 +401,7 @@
 &lt;p>&lt;a href="https://refactoringguru.cn/design-patterns/builder">建造者设计模式（生成器模式） (refactoringguru.cn)&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%9B%B4%E4%B8%BA%E4%BC%98%E9%9B%85%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/golang/">Golang</category></item><item><title>局部敏感哈希</title><link>https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/</guid><pubDate>Thu, 25 Aug 2022 23:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>传统哈希算法目的是减少冲突以加速增删改查的速度，而此处介绍的局部敏感哈希（Locality Sensitive Hash）旨在最大化哈希冲突，尽可能保证以更高概率将相似的输入项散列到相同的桶中。通过这么一种哈希算法，我们可以将高维的数据映射到一个低维的向量空间，同时也能保证在一定概率下，原有向量空间相似的输入项在映射后的向量空间中仍然相似。LSH算法可用于数据聚类和最近邻搜索，在实际场景中，LSH算法常用于信息检索、数据挖掘、推荐系统以及视觉相似性排名等应用。&lt;/p>
+&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/golang/">Golang</category></item><item><title>局部敏感哈希</title><link>https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/</guid><pubDate>Thu, 25 Aug 2022 23:00:00 +0800</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>传统哈希算法目的是减少冲突以加速增删改查的速度，而此处介绍的局部敏感哈希（Locality Sensitive Hash）旨在最大化哈希冲突，尽可能保证以更高概率将相似的输入项散列到相同的桶中。通过这么一种哈希算法，我们可以将高维的数据映射到一个低维的向量空间，同时也能保证在一定概率下，原有向量空间相似的输入项在映射后的向量空间中仍然相似。LSH算法可用于数据聚类和最近邻搜索，在实际场景中，LSH算法常用于信息检索、数据挖掘、推荐系统以及视觉相似性排名等应用。&lt;/p>
 &lt;h2 id="定义">定义&lt;/h2>
 &lt;p>对于一个LSH的哈希算法族（原文为：LSH Family）$\mathcal{F}$，定义度量空间$\mathcal{M}=(M,d)$，阈值$R&amp;gt;0$，近似因子$c&amp;gt;1$，以及概率$P_1,P_2$。$\mathcal{F}$是一个函数的集合，其中的函数$h:M\rightarrow S$将度量空间的元素映射到桶中$s\in S$。一个LSH算法族应满足如下条件，对于在度量空间$M$的两个点$p,q\in M$，以及从$\mathcal{F}$中随机选取的任意一个散列函数$h$:&lt;/p>
 &lt;ol>
@@ -434,7 +434,7 @@
 &lt;p>&lt;a href="https://dl.acm.org/doi/abs/10.1145/1242572.1242592">Detecting near-duplicates for web crawling | Proceedings of the 16th international conference on World Wide Web&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hash/">Hash</category></item><item><title>Go语言中的性能优化</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid><pubDate>Sat, 20 Aug 2022 23:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;blockquote class="quote">
+&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hash/">Hash</category></item><item><title>Go语言中的性能优化</title><link>https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid><pubDate>Sat, 20 Aug 2022 23:00:00 +0800</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;blockquote class="quote">
 &lt;p>性能优化，简而言之，就是在不影响系统运行正确性的前提下，使之运行地更快，完成特定功能所需的时间更短。&lt;/p>&lt;/blockquote>
 &lt;h1 id="正确高效使用数据结构">正确高效使用数据结构&lt;/h1>
 &lt;h2 id="正确使用slice">正确使用Slice&lt;/h2>
@@ -456,9 +456,105 @@
 &lt;/div>
 &lt;/div>&lt;p>在通过函数传递slice类型的参数时，需要注意由于Go语言默认按值传递参数，调用函数传入的参数与函数内部得到的参数实际上是不相同的。但是slice类型中包含一个指向真正数据存储位置的指针，因而在调用参数类型为slice的函数时，对其进行修改也会导致原slice的数据变更。
 但是，如果在调用函数中，对该slice进行了append操作导致slice扩容进而导致slice的array指向其他位置时，对函数内的slice进行任意修改都不会影响到函数外的slice。&lt;/p>
-&lt;style type="text/css">.notice{--root-color:#444;--root-background:#eff;--title-color:#fff;--title-background:#7bd;--warning-title:#c33;--warning-content:#fee;--info-title:#fb7;--info-content:#fec;--note-title:#6be;--note-content:#e7f2fa;--tip-title:#5a5;--tip-content:#efe}@media (prefers-color-scheme:dark){.notice{--root-color:#ddd;--root-background:#eff;--title-color:#fff;--title-background:#7bd;--warning-title:#800;--warning-content:#400;--info-title:#a50;--info-content:#420;--note-title:#069;--note-content:#023;--tip-title:#363;--tip-content:#121}}body.dark .notice{--root-color:#ddd;--root-background:#eff;--title-color:#fff;--title-background:#7bd;--warning-title:#800;--warning-content:#400;--info-title:#a50;--info-content:#420;--note-title:#069;--note-content:#023;--tip-title:#363;--tip-content:#121}.notice{padding:18px;line-height:24px;margin-bottom:24px;border-radius:4px;color:var(--root-color);background:var(--root-background)}.notice p:last-child{margin-bottom:0}.notice-title{margin:-18px -18px 12px;padding:4px 18px;border-radius:4px 4px 0 0;font-weight:700;color:var(--title-color);background:var(--title-background)}.notice.warning .notice-title{background:var(--warning-title)}.notice.warning{background:var(--warning-content)}.notice.info .notice-title{background:var(--info-title)}.notice.info{background:var(--info-content)}.notice.note .notice-title{background:var(--note-title)}.notice.note{background:var(--note-content)}.notice.tip .notice-title{background:var(--tip-title)}.notice.tip{background:var(--tip-content)}.icon-notice{display:inline-flex;align-self:center;margin-right:8px}.icon-notice img,.icon-notice svg{height:1em;width:1em;fill:currentColor}.icon-notice img,.icon-notice.baseline svg{top:.125em;position:relative}&lt;/style>
-&lt;div>&lt;svg width="0" height="0" display="none" xmlns="http://www.w3.org/2000/svg">&lt;symbol id="tip-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">&lt;path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/>&lt;/symbol>&lt;symbol id="note-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">&lt;path d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/>&lt;/symbol>&lt;symbol id="warning-notice" viewBox="0 0 576 512" preserveAspectRatio="xMidYMid meet">&lt;path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/>&lt;/symbol>&lt;symbol id="info-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">&lt;path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/>&lt;/symbol>&lt;/svg>&lt;/div>&lt;div class="notice warning" >
-&lt;p class="first notice-title">&lt;span class="icon-notice baseline">&lt;svg>&lt;use href="https://my0sotis.github.io/blog/tech/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/#warning-notice">&lt;/use>&lt;/svg>&lt;/span>&lt;/p>&lt;p>在函数参数有slice类型时，应尽量避免对slice进行append操作。&lt;/p>&lt;/div>
+&lt;style type="text/css">
+.notice {
+--title-color: #fff;
+--title-background-color: #6be;
+--content-color: #444;
+--content-background-color: #e7f2fa;
+}
+.notice.info {
+--title-background-color: #fb7;
+--content-background-color: #fec;
+}
+.notice.tip {
+--title-background-color: #5a5;
+--content-background-color: #efe;
+}
+.notice.warning {
+--title-background-color: #c33;
+--content-background-color: #fee;
+}
+@media (prefers-color-scheme:dark) {
+.notice {
+--title-color: #fff;
+--title-background-color: #069;
+--content-color: #ddd;
+--content-background-color: #023;
+}
+.notice.info {
+--title-background-color: #a50;
+--content-background-color: #420;
+}
+.notice.tip {
+--title-background-color: #363;
+--content-background-color: #121;
+}
+.notice.warning {
+--title-background-color: #800;
+--content-background-color: #400;
+}
+}
+body.dark .notice {
+--title-color: #fff;
+--title-background-color: #069;
+--content-color: #ddd;
+--content-background-color: #023;
+}
+body.dark .notice.info {
+--title-background-color: #a50;
+--content-background-color: #420;
+}
+body.dark .notice.tip {
+--title-background-color: #363;
+--content-background-color: #121;
+}
+body.dark .notice.warning {
+--title-background-color: #800;
+--content-background-color: #400;
+}
+.notice {
+padding: 18px;
+line-height: 24px;
+margin-bottom: 24px;
+border-radius: 4px;
+color: var(--content-color);
+background: var(--content-background-color);
+}
+.notice p:last-child {
+margin-bottom: 0
+}
+.notice-title {
+margin: -18px -18px 12px;
+padding: 4px 18px;
+border-radius: 4px 4px 0 0;
+font-weight: 700;
+color: var(--title-color);
+background: var(--title-background-color);
+}
+.icon-notice {
+display: inline-flex;
+align-self: center;
+margin-right: 8px;
+}
+.icon-notice img,
+.icon-notice svg {
+height: 1em;
+width: 1em;
+fill: currentColor;
+}
+.icon-notice img,
+.icon-notice.baseline svg {
+top: .125em;
+position: relative;
+}
+&lt;/style>&lt;div class="notice warning" >
+&lt;p class="notice-title">
+&lt;span class="icon-notice baseline">
+&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="126 76.5 300 300">
+&lt;path d="M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z"/>
+&lt;/svg>
+&lt;/span>警告&lt;/p>&lt;p>在函数参数有slice类型时，应尽量避免对slice进行append操作。&lt;/p>&lt;/div>
 &lt;h2 id="高效使用slice">高效使用slice&lt;/h2>
 &lt;ol>
 &lt;li>
@@ -595,7 +691,7 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;li>注意buffered和unbuffered channel的区别（尽量用buffered）&lt;/li>
 &lt;/ol>
 &lt;h1 id="happen-before">Happen Before&lt;/h1>
-&lt;p>&lt;a href="https://go.dev/ref/mem">https://go.dev/ref/mem&lt;/a>&lt;/p></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/golang/">Golang</category></item><item><title>Hugo与时差</title><link>https://my0sotis.github.io/blog/tech/hugo%E4%B8%8E%E6%97%B6%E5%B7%AE/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/hugo%E4%B8%8E%E6%97%B6%E5%B7%AE/</guid><pubDate>Thu, 18 Aug 2022 13:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>是日晚上，我在写完上一篇博客时，没有本地预览便直接提交到了GitHub分支上，打算等待GitHub Actions执行完直接在手机上进行预览。不出意外的话就要出意外了，我刷新了好几次都没有看到我新发的博文，便在本地运行&lt;code>hugo server&lt;/code>，依旧是没有新的博客。&lt;/p>
+&lt;p>&lt;a href="https://go.dev/ref/mem">https://go.dev/ref/mem&lt;/a>&lt;/p></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/golang/">Golang</category></item><item><title>Hugo与时差</title><link>https://my0sotis.github.io/blog/tech/hugo%E4%B8%8E%E6%97%B6%E5%B7%AE/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/hugo%E4%B8%8E%E6%97%B6%E5%B7%AE/</guid><pubDate>Thu, 18 Aug 2022 13:00:00 +0800</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>是日晚上，我在写完上一篇博客时，没有本地预览便直接提交到了GitHub分支上，打算等待GitHub Actions执行完直接在手机上进行预览。不出意外的话就要出意外了，我刷新了好几次都没有看到我新发的博文，便在本地运行&lt;code>hugo server&lt;/code>，依旧是没有新的博客。&lt;/p>
 &lt;p>我博文的Front Matter如下所示：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -626,7 +722,7 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">buildFuture&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>也可以在使用Hugo命令构建博客的时候，加上&lt;code>--buildFuture&lt;/code>参数，以构建生成..未来..发布的博客。&lt;/p></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hugo/">Hugo</category></item><item><title>GitHub Actions驱动的SpringBoot项目构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</guid><pubDate>Wed, 17 Aug 2022 09:00:00 +0800</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>先前尝试使用GitHub Actions进行过博客的自动部署发布，GitHub Actions集自动化构建、部署、发布于一体，仅需编写简短的YAML文件，便可实现持续集成发布，非常便捷高效，仅需在分支上进行一次&lt;code>push&lt;/code>操作，就能够自动的发布到先上去。之前只是将静态的网页发布到GitHub Pages上，而本文尝试一些更为复杂的操作，即SpringBoot项目的持续集成构建部署发布。&lt;/p>
+&lt;/div>&lt;p>也可以在使用Hugo命令构建博客的时候，加上&lt;code>--buildFuture&lt;/code>参数，以构建生成..未来..发布的博客。&lt;/p></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/hugo/">Hugo</category></item><item><title>GitHub Actions驱动的SpringBoot项目构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/</guid><pubDate>Wed, 17 Aug 2022 09:00:00 +0800</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>先前尝试使用GitHub Actions进行过博客的自动部署发布，GitHub Actions集自动化构建、部署、发布于一体，仅需编写简短的YAML文件，便可实现持续集成发布，非常便捷高效，仅需在分支上进行一次&lt;code>push&lt;/code>操作，就能够自动的发布到先上去。之前只是将静态的网页发布到GitHub Pages上，而本文尝试一些更为复杂的操作，即SpringBoot项目的持续集成构建部署发布。&lt;/p>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
 &lt;ul>
 &lt;li>Git&lt;/li>
@@ -649,14 +745,14 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;/span>&lt;span class="lnt">7
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@RestController&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="kd">class&lt;/span> &lt;span class="nc">HelloController&lt;/span> &lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nd">@GetMapping&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;/hello&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="nf">hello&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;hello&amp;#34;&lt;/span>&lt;span class="o">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@RestController&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kd">class&lt;/span> &lt;span class="nc">HelloController&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nd">@GetMapping&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/hello&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">hello&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;hello&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h3 id="2-创建一个github仓库">2. 创建一个GitHub仓库&lt;/h3>
 &lt;p>在GitHub上创建一个新的仓库，并将本地的SpringBoot项目推送到GitHub上。&lt;/p>
@@ -788,7 +884,7 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;ol>
 &lt;li>在Workflow中，我们是通过SCP将构建好的jar包发送到云服务器上，由于GitHub的服务器大多在美国，而我们所选择的云服务器一般在中国，使用SCP传送数据往往会非常慢，以本文为例，构建出的jar文件约16MB，SCP命令执行时间约为10分钟，这样的时间还是非常漫长的，而实际生产过程中我们的jar包将会更大，那么这个时间就会更长，这样就会影响到我们的开发效率。后续将考虑使用GitHub Packages或者Docker进行优化。&lt;/li>
 &lt;li>在最后的构建过程中，为了使得jar包在后台运行，我们使用了&lt;code>nohup java -jar ${{ secrets.JAR_NAME }} &amp;amp;&lt;/code>命令。但是问题就显而易见，除非运行jar包有误，否则GitHub Actions的Workflow将一直卡在这条指令，直至Workflow耗费完所有时间，这是显然有误的，这个问题应该也可以通过使用Docker解决。&lt;/li>
-&lt;/ol></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/github-actions/">GitHub Actions</category><category domain="https://my0sotis.github.io/blog/tags/springboot/">SpringBoot</category></item><item><title>PyTorch下神经网络构建的基本结构</title><link>https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/</guid><pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;blockquote class="quote zh">
+&lt;/ol></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/github-actions/">GitHub Actions</category><category domain="https://my0sotis.github.io/blog/tags/springboot/">SpringBoot</category></item><item><title>PyTorch下神经网络构建的基本结构</title><link>https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/</guid><pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;blockquote class="quote zh">
 &lt;p>本文主要参考李宏毅2021春机器学习课程中的 PyTorch 教学内容，详细内容可查看李宏毅2021春机器学习课程官网和&lt;a href="https://www.bilibili.com/video/BV1Wv411h7kN?p=5">李宏毅2021春机器学习课程视频&lt;/a>。&lt;/p>&lt;/blockquote>
 &lt;p>使用 PyTorch 构建神经网络模型主要分为几个部分，即导入数据、定义网络结构及损失函数等、训练模型、验证模型和测试模型&lt;sup id="fnref:1">&lt;a href="https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。下面通过代码的范例进行介绍&lt;/p>
 &lt;h2 id="导入数据">导入数据&lt;/h2>
@@ -1008,7 +1104,7 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;p>&lt;a href="https://pytorch.org/docs/stable/index.html">PyTorch documentation — PyTorch 1.10.0 documentation&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/pytorch%E4%B8%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/pytorch/">PyTorch</category><category domain="https://my0sotis.github.io/blog/tags/nn/">NN</category></item><item><title>GitHub Actions 驱动的博客构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</guid><pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客，便只能通过项目创建GitHub Pages，但是这样的话就会出现一个问题，如果不将源码公开的话就无法将博客展示出来，但是我并不确定源码中什么东西是不能够公开的 &lt;s>（之前为了方便甚至将SSH公钥和私钥放在公开的博客仓库中，在同学提醒下才删除）&lt;/s>，于是想将源码和构建出来的代码仓库分离的想法。再者，为了便利的进行博客的构建发布，便考虑使用GitHub Actions自动化地进行持续集成开发。&lt;/p>
+&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/pytorch/">PyTorch</category><category domain="https://my0sotis.github.io/blog/tags/nn/">NN</category></item><item><title>GitHub Actions 驱动的博客构建</title><link>https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</guid><pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>此前已经使用GitHub账号创建了一个个人博客，想要保留先前的博客并重新创建一个博客，便只能通过项目创建GitHub Pages，但是这样的话就会出现一个问题，如果不将源码公开的话就无法将博客展示出来，但是我并不确定源码中什么东西是不能够公开的 &lt;s>（之前为了方便甚至将SSH公钥和私钥放在公开的博客仓库中，在同学提醒下才删除）&lt;/s>，于是想将源码和构建出来的代码仓库分离的想法。再者，为了便利的进行博客的构建发布，便考虑使用GitHub Actions自动化地进行持续集成开发。&lt;/p>
 &lt;h2 id="demands">Demands&lt;/h2>
 &lt;ol>
 &lt;li>源码与生成网站代码分析，于我而言则是，源码在一个 &lt;code>private&lt;/code> 的仓库，生成出来的网站文件存放在一个 &lt;code>public&lt;/code> 的仓库中用以作为 GitHub Pages 的展示页面。&lt;/li>
@@ -1122,7 +1218,7 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;p>&lt;a href="https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-deploy-to-external-repository-external_repository">peaceiris/actions-gh-pages: GitHub Actions for GitHub Pages 🚀 Deploy static files and publish your site easily. Static-Site-Generators-friendly.&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="https://my0sotis.github.io/blog/tech/github-actions%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/#fnref1:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/github-actions/">GitHub Actions</category><category domain="https://my0sotis.github.io/blog/tags/hugo/">Hugo</category></item><item><title>Hello World!</title><link>https://my0sotis.github.io/blog/life/hello-world/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/life/hello-world/</guid><pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;center>&lt;i>This is the very first blog of mine.&lt;/i>&lt;/center>
+&lt;/div></description><category domain="https://my0sotis.github.io/blog/tech/">tech</category><category domain="https://my0sotis.github.io/blog/tags/github-actions/">GitHub Actions</category><category domain="https://my0sotis.github.io/blog/tags/hugo/">Hugo</category></item><item><title>Hello World!</title><link>https://my0sotis.github.io/blog/life/hello-world/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/life/hello-world/</guid><pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;center>&lt;i>This is the very first blog of mine.&lt;/i>&lt;/center>
 &lt;p>原本这篇博客仅是占位而已，以保证这个分区有文章，后来一想，还是需要写一些东西的，就当是这个博客的 &lt;s>创刊号&lt;/s> 开篇词吧。&lt;/p>
 &lt;p>当时创建自己的博客也是出于记录自己的技术学习路线，同时也是书写自己的技术经验以飨后人，使后来者少走弯路。毕竟中文互联网上相关的所谓博客不过是互相复制，在网上兜兜转转找寻解决方案最终在英文网站才能找到问题的答案也是常有的事，也是想摆脱商用博客的束缚，于浮世间觅一份清欢。&lt;/p>
 &lt;p>再者，随着升学后，来到了一个学术水平更高的学校（maybe），在这里认识了解到许许多多兼具学术造诣以及工程能力的教师同学，有历经数年笔耕不辍，稳定产出数十万甚至百万行代码的老师，更不缺少灿若星辰的学术大牛，这些人都是我想要学习的目标，借此记录自己学习过程，也是大有裨益。&lt;/p>
@@ -1130,7 +1226,7 @@ map在delete操作时不会释放底层的存储。&lt;/li>
 &lt;h2 class="viva-la-vida">Per Aspera Ad Astra&lt;/h2>
 &lt;p style="text-align:center">循此苦旅，直抵群星
 &lt;hr>
-&lt;center>此篇记于研一伊始，惟愿毕业无悔而已。&lt;/center></description><category domain="https://my0sotis.github.io/blog/life/">life</category></item><item><title>Powered By Hugo</title><link>https://my0sotis.github.io/blog/tech/powered-by-hugo/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/powered-by-hugo/</guid><pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate><author>my0sotis@qq.com (Mavericks)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>距离上次更新博客已一年有余，在忙碌完毕业升学的种种之后，又有重拾博客的念头，于忙里偷闲中重构了一个新的博客，从以前使用 Hexo+NexT 逐步转向 Hugo+MemE ，现今已是全面 Powered By Hugo 了！&lt;/p>
+&lt;center>此篇记于研一伊始，惟愿毕业无悔而已。&lt;/center></description><category domain="https://my0sotis.github.io/blog/life/">life</category></item><item><title>Powered By Hugo</title><link>https://my0sotis.github.io/blog/tech/powered-by-hugo/</link><guid isPermaLink="true">https://my0sotis.github.io/blog/tech/powered-by-hugo/</guid><pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>距离上次更新博客已一年有余，在忙碌完毕业升学的种种之后，又有重拾博客的念头，于忙里偷闲中重构了一个新的博客，从以前使用 Hexo+NexT 逐步转向 Hugo+MemE ，现今已是全面 Powered By Hugo 了！&lt;/p>
 &lt;p>重构博客并非一时兴起，而是有多方面的原因。&lt;/p>
 &lt;p>一方面，之前在使用 Hexo+NexT 时，怀着满腔热情对 NexT 做了许多大刀阔斧的修改，将当时版本的博客打磨成了自己最为满意的版本，但是随着时间的推移，老旧版本的许多弊端便显现出来，无法拥有全新版本许多新的特性，但是要升级的话，需要重新对主题进行修改（因为此前的修改都是基于主题原文件进行的，使用 &lt;code>git submodule update&lt;/code> 未免会将原有的修改覆盖），出于对新特性的追求，在原博客的仓库中新创建了一个分支，使用了当时新版本的 Hexo和NexT ，继续进行修改，不知是 &lt;code>node_modules&lt;/code> 污染了主分支上原有的博客源码还是如何，导致当时的博客无法正常启动，&lt;s>虽然我现在找回来了&lt;/s>，于是萌生了使用其他博客框架的想法。&lt;/p>
 &lt;p>先前为了使博客的文字更加美观，参考了 &lt;strong>Google Fonts 已支持思源宋体！&lt;/strong> &lt;sup id="fnref:1">&lt;a href="https://my0sotis.github.io/blog/tech/powered-by-hugo/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>这篇文章，看到这个博客时便被深深地吸引了，当即安装了 Hugo，并下载了 ..此博客.. &lt;sup id="fnref:2">&lt;a href="https://my0sotis.github.io/blog/tech/powered-by-hugo/#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> 的主题，也就是 MemE&lt;sup id="fnref:3">&lt;a href="https://my0sotis.github.io/blog/tech/powered-by-hugo/#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> ，但由于正值毕业和升学期间，实在分身乏术，就暂且搁置了。直至现今偷得浮生一日闲🤪，难得有时间整理博客，便在原先的基础上修改完善了博客直至现在这番模样。&lt;/p>
